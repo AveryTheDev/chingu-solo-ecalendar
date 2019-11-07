@@ -1,0 +1,20 @@
+/*
+    fonts to be used:
+    - Montserrat
+    - Open Sans
+    - Open Sans Condensed
+*/
+
+/* 
+    colors used:
+        Calendar Side:
+
+        header, year, closestThreeMonths, currentDayOfWeek: #26B9CC
+        weekendDateAndNumbers: #9DE2EB 
+        currentMonthDates: #0D1012;
+        weekDays: #839395;
+        prev/next month dates: #696868;
+
+        text: #fff
+        linear-gradient: linear-gradient(180deg, rgba(209, 226, 188, 0.9) 0%, rgba(255, 255, 255, 0) 100%), rgba(160, 236, 247, 0.5);
+*/
