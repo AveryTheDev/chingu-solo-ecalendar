@@ -4,9 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <title>e-Calendar</title>
 </head>
 <body>
-    <h1>eCal</h1>
+    <div class="cal-container">
+        <div class="cal-header">
+            <h1 class="cal-title">eCal</h1>
+            <p class="cal-year">2019</p>
+        </div>
+        <div class="calendar-grid-container">
+            <!--date values calc from script file will display here-->
+        </div>
+    </div>
+    <div class="event-panel">
+            <!--values will be fetched via JS-->
+        <div class="current-date-display">
+            <p class="current-day-of-week"></p>
+            <div class="current-day-container">
+                <p class="current-month-of-day"></p>
+                <p class="current-day"></p>
+            </div>            
+        </div>
+        <div class="event-list">
+            <div class="event-date"></div>
+            <div class="event-bar"></div>
+            <div class="event-names"></div>
+        </div>
+        <div class="event-adder">
+            <!--triggers modal TBA-->
+            <p class="add-event-text"></p>
+            <button class="event-button"></button>
+        </div>
+        <script src="script.js"></script>
+    </div>
 </body>
 </html>
