@@ -152,14 +152,57 @@ const createMonthMatrix = (prevMonthLength, monthLength, index) => {
   }
 };
 
-const createMonthGrid = () => {
-  //location of grid created below
+const gridFromMatrix = (matrix, day) => {
+  //where grid data will be inserted
   const calendar = document.getElementsByClassName("calendar-grid-container");
+  //grid data and current date
+  const monthData = matrix;
+  const today = day;
 
+  //initialization of row
+  let row = document.createElement("div");
+
+  row.className = "calendar_row";
+
+  //counter to track when transition to next week has occured;
+  let counter = 1;
+
+  // loops through arrays nested in matrix
+  for (i = 0; i < monthData.length; i++) {
+    for (j = 0; j < monthData[i].length; j++) {
+      if (counter % 7 === 0 || i === monthData.length - 1) {
+        let col = document.createElement("div");
+        calendar[0].appendChild(row);
+
+        col.id = monthData[i][j] * Date.now();
+        col.innerText = monthData[i][j];
+        row.appendChild(col);
+
+        counter++;
+      } else {
+        let col = document.createElement("div");
+        //see if date is today's date
+        if (monthData[i][j] === today) {
+          col.className = "calendar_current_date";
+        } else {
+          col.className = "calendar_col";
+        }
+
+        col.id = monthData[i][j] * Date.now();
+        col.innerText = monthData[i][j];
+        row.appendChild(col);
+        counter++;
+      }
+    }
+  }
+};
+
+const createMonthGrid = () => {
   const today = new Date();
 
   //grab currentDate data
   const currentYear = today.getFullYear();
+  const currentDay = today.getDate();
 
   //grab previous month data
   const previousMonthLength = new Date(
@@ -187,7 +230,13 @@ const createMonthGrid = () => {
   );
 
   //need to cycle through each array in the matrix and create an element per value
+  const grid = gridFromMatrix(monthMatrix, currentDay);
+};
+
+const start = () => {
+  fetchToday();
+  createMonthGrid();
 };
 
 //runs as the document loads
-document.body.onload = createMonthGrid;
+document.body.onload = start;
