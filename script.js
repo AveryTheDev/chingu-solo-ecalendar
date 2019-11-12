@@ -152,6 +152,7 @@ const createMonthMatrix = (prevMonthLength, monthLength, index) => {
   }
 };
 
+//takes values from the matrix to assemble into a grid format
 const gridFromMatrix = (matrix, day) => {
   //where grid data will be inserted
   const calendar = document.getElementsByClassName("calendar-grid-container");
@@ -197,6 +198,7 @@ const gridFromMatrix = (matrix, day) => {
   }
 };
 
+//collection of functions that results in the creation of the grid
 const createMonthGrid = () => {
   const today = new Date();
 
