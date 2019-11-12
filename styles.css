@@ -7,6 +7,7 @@
 
 /* 
     colors used:
+    
         Calendar Side:
 
         header, year, closestThreeMonths, currentDayOfWeek: #26B9CC
@@ -15,6 +16,25 @@
         weekDays: #839395;
         prev/next month dates: #696868;
 
+        To-do list:
+
         text: #fff
         linear-gradient: linear-gradient(180deg, rgba(209, 226, 188, 0.9) 0%, rgba(255, 255, 255, 0) 100%), rgba(160, 236, 247, 0.5);
 */
+
+.cal-container {
+    display: flex;
+}
+
+.calendar_row {
+  display: grid;
+  border: 2px solid black;
+  height: 70vh;
+  width: 80vw;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+}
+
+.calendar_current_date {
+    color: red;
+}
