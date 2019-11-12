@@ -48,19 +48,6 @@ const setDayOfWeek = weekday => {
   }
 };
 
-const setMonthLength = month => {
-  switch (month) {
-    case 0 | 2 | 4 | 6 | 7 | 9 | 11:
-      return 31;
-    case 1:
-      return 28;
-    case 3 | 5 | 8 | 10:
-      return 30;
-    default:
-      return;
-  }
-};
-
 const fetchToday = () => {
   const currentMonth = document.getElementsByClassName("current-month-of-day");
   const currentDayOfWeek = document.getElementsByClassName(
@@ -78,17 +65,17 @@ const fetchToday = () => {
   const year = today.getFullYear();
 
   //places text in HTML tags
-  currentMonth[0].innerHTML = month;
-  currentDayOfWeek[0].innerHTML = dayOfWeek;
-  currentDate[0].innerHTML = date;
-  currentYear[0].innerHTML = year;
+  currentMonth[0].innerText = month;
+  currentDayOfWeek[0].innerText = dayOfWeek;
+  currentDate[0].innerText = date;
+  currentYear[0].innerText = year;
 };
 
 //determines day of week the first date of the month is
 const findFirstOfMonthIndex = (month, year) => {
-  const month = setMonthName(month);
-
-  const dayOfWeek = getDay(`${month} 1 ${year}`);
+  const selectedMonth = setMonthName(month);
+  const date = new Date(`${selectedMonth} 1 ${year}`);
+  const dayOfWeek = date.getDay();
 
   return dayOfWeek;
 };
@@ -114,6 +101,8 @@ const createMonthMatrix = (prevMonthLength, monthLength, index) => {
         day++;
       }
     }
+
+    return monthArray;
   }
   //first day of week
   else {
@@ -121,6 +110,7 @@ const createMonthMatrix = (prevMonthLength, monthLength, index) => {
     let firstArrayDate = prevMonthLength - (index - 1);
     let day;
 
+    //creates first row of calendar with prev and current month dates
     for (let i = 0; i < 7; i++) {
       if (day > prevMonthLength) {
         day = 1;
@@ -130,26 +120,35 @@ const createMonthMatrix = (prevMonthLength, monthLength, index) => {
         day = firstArrayDate;
         dateArray.push(day);
         day++;
+      } else {
+        day < prevMonthLength;
+        dateArray.push(day);
+        day++;
       }
     }
 
-    monthArray.push(dayArray);
+    monthArray.push(dateArray);
+    dateArray = [];
 
-    const datesLeft = monthLength - day;
+    const datesLeft = monthLength - (day - 1);
 
+    //manages the rest of the calendar to find the remaining days of the current calendar month
     for (let i = 0; i < datesLeft; i++) {
       if (dateArray.length < 7 && i < datesLeft - 1) {
         dateArray.push(day);
         day++;
       } else if (i === datesLeft - 1) {
+        dateArray.push(day);
         monthArray.push(dateArray);
         return monthArray;
-      } else {
+      } else if (dateArray.length === 7) {
         monthArray.push(dateArray);
-        dayArray = [day];
+        dateArray = [day];
         day++;
       }
     }
+
+    return monthArray;
   }
 };
 
@@ -160,17 +159,25 @@ const createMonthGrid = () => {
   const today = new Date();
 
   //grab currentDate data
-  const currentDay = today.getDate();
-  const currentMonth = setMonthName(today.getMonth());
-  const previousMonth = today.getMonth() - 1;
   const currentYear = today.getFullYear();
 
   //grab previous month data
-  const previousMonthLength = setMonthLength(previousMonth);
-  const currentMonthLength = setMonthLength(today.getMonth());
+  const previousMonthLength = new Date(
+    currentYear,
+    today.getMonth(),
+    0
+  ).getDate();
+  const currentMonthLength = new Date(
+    currentYear,
+    today.getMonth() + 1,
+    0
+  ).getDate();
 
   //find first day of week for current month
-  const firstOfMonthIndex = findFirstOfMonthIndex(currentMonth, currentYear);
+  const firstOfMonthIndex = findFirstOfMonthIndex(
+    today.getMonth(),
+    currentYear
+  );
 
   //create matrix of month values
   const monthMatrix = createMonthMatrix(
@@ -183,4 +190,4 @@ const createMonthGrid = () => {
 };
 
 //runs as the document loads
-document.body.onload = fetchToday;
+document.body.onload = createMonthGrid;
