@@ -153,17 +153,17 @@ const createMonthMatrix = (prevMonthLength, monthLength, index) => {
 };
 
 //takes values from the matrix to assemble into a grid format
-const gridFromMatrix = (matrix, day) => {
+const gridFromMatrix = (matrix, day, month, year) => {
   //where grid data will be inserted
   const calendar = document.getElementsByClassName("calendar-grid-container");
   //grid data and current date
   const monthData = matrix;
   const today = day;
 
-  //initialization of row
-  let row = document.createElement("div");
+  //initialization of grid
+  let grid = document.createElement("div");
 
-  row.className = "calendar_row";
+  grid.className = "calendar_grid";
 
   //counter to track when transition to next week has occured;
   let counter = 1;
@@ -172,26 +172,26 @@ const gridFromMatrix = (matrix, day) => {
   for (i = 0; i < monthData.length; i++) {
     for (j = 0; j < monthData[i].length; j++) {
       if (counter % 7 === 0 || i === monthData.length - 1) {
-        let col = document.createElement("div");
-        calendar[0].appendChild(row);
+        let date = document.createElement("div");
+        calendar[0].appendChild(grid);
 
-        col.id = monthData[i][j] * Date.now();
-        col.innerText = monthData[i][j];
-        row.appendChild(col);
+        date.id = `${month}${monthData[i][j]}${year}`;
+        date.innerText = monthData[i][j];
+        grid.appendChild(date);
 
         counter++;
       } else {
-        let col = document.createElement("div");
+        let date = document.createElement("div");
         //see if date is today's date
         if (monthData[i][j] === today) {
-          col.className = "calendar_current_date";
+          date.className = "calendar_current_date";
         } else {
-          col.className = "calendar_col";
+          date.className = "calendar_date";
         }
 
-        col.id = monthData[i][j] * Date.now();
-        col.innerText = monthData[i][j];
-        row.appendChild(col);
+        date.id = `${month}${monthData[i][j]}${year}`;
+        date.innerText = monthData[i][j];
+        grid.appendChild(date);
         counter++;
       }
     }
@@ -205,16 +205,13 @@ const createMonthGrid = () => {
   //grab currentDate data
   const currentYear = today.getFullYear();
   const currentDay = today.getDate();
+  const currentMonth = today.getMonth();
 
   //grab previous month data
-  const previousMonthLength = new Date(
-    currentYear,
-    today.getMonth(),
-    0
-  ).getDate();
+  const previousMonthLength = new Date(currentYear, currentMonth, 0).getDate();
   const currentMonthLength = new Date(
     currentYear,
-    today.getMonth() + 1,
+    currentMonth + 1,
     0
   ).getDate();
 
@@ -232,7 +229,12 @@ const createMonthGrid = () => {
   );
 
   //need to cycle through each array in the matrix and create an element per value
-  const grid = gridFromMatrix(monthMatrix, currentDay);
+  const grid = gridFromMatrix(
+    monthMatrix,
+    currentDay,
+    currentMonth,
+    currentYear
+  );
 };
 
 const start = () => {

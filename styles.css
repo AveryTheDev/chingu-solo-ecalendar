@@ -26,7 +26,7 @@
     display: flex;
 }
 
-.calendar_row {
+.calendar_grid {
   display: grid;
   border: 2px solid black;
   height: 70vh;
