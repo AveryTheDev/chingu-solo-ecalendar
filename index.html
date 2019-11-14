@@ -37,6 +37,22 @@
             <button class="event-button">Add Event</button>
         </div>
     </div>
+    <div class="modal">
+        <div class="close-modal">X</div>
+        <form action="post" class="modal-form">
+            <input name='user-event' type="text" class="modal-input" placeholder="Event" id="event-name">
+            <div>
+                <input type="text" class="event-start" placeholder="start-date">
+                <input type="text" class="event-end" placeholder="end-date">
+            </div>
+            <input type="text" class="event-people" placeholder="people">
+            <input type="text" class="event-location" placeholder="location">
+            <input type="text" class="event-description" placeholder="description">
+            <button class="save-event-button" type="button">
+                Save Event
+            </button>
+        </form>
+    </div>
 <script src="script.js"></script>
 </body>
 </html>
