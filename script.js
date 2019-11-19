@@ -175,7 +175,7 @@ const gridFromMatrix = (matrix, day, month, year) => {
         let date = document.createElement("div");
         calendar[0].appendChild(grid);
 
-        date.id = `${month}${monthData[i][j]}${year}`;
+        date.id = `${month + 1}${monthData[i][j]}${year}`;
         date.innerText = monthData[i][j];
         grid.appendChild(date);
 
@@ -189,7 +189,7 @@ const gridFromMatrix = (matrix, day, month, year) => {
           date.className = "calendar_date";
         }
 
-        date.id = `${month}${monthData[i][j]}${year}`;
+        date.id = `${month + 1}${monthData[i][j]}${year}`;
         date.innerText = monthData[i][j];
         grid.appendChild(date);
         counter++;
@@ -245,27 +245,55 @@ const start = () => {
 //runs as the document loads
 document.body.onload = start;
 
-//////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
 
-//handles addition of to-do list items
+//handles addition of events to calendar and event list
 
 //submits all collected info about user event
-const saveButton = document.getElementsByClassName("save-event-button");
+const saveButton = document.getElementsByClassName("save-event-button")[0];
 
 const getValue = (...form_data) => {
   const values = [];
 
   for (let value of form_data) {
-    values.push(value.value);
+    values.push(value);
   }
+  return values[0];
+};
 
-  return values;
+//reformats value from date inputs for various purposes in the calendar app
+const reformatDate = (date, purpose = "") => {
+  const originalFormat = date.split("-");
+
+  if (purpose === "list") {
+    const newFormat = originalFormat[2];
+    return newFormat;
+  } else if (purpose === "set_id") {
+    const newFormat = [
+      originalFormat[1],
+      originalFormat[2],
+      originalFormat[0]
+    ].join("");
+    return parseInt(newFormat, 10);
+  } else {
+    const newFormat = [
+      setMonthName(originalFormat[1] - 1),
+      originalFormat[2],
+      originalFormat[0]
+    ].join(" ");
+
+    return newFormat;
+  }
 };
 
 //adds date and event to list on left of site page
 const appendToEventList = (event, start, end) => {
-  const dateHolder = document.getElementsByClassName("event-date");
-  const eventList = document.getElementsByClassName("event-names");
+  const dateHolder = document.getElementById("event-date");
+  const eventList = document.getElementById("event-names");
+
+  ///date returns in the format of "yyyy-mm-dd" so format must be changed
+  start = reformatDate(start, "list");
+  end = reformatDate(end, "list");
 
   const date = document.createElement("div");
   date.className = "date";
@@ -284,62 +312,85 @@ const appendToEventList = (event, start, end) => {
 
 //takes all provided information to create a calendar div representing the event
 const createCalendarEventDiv = (...event_info) => {
-  const eventContainer = document.createElement("div");
-  eventContainer.className = "calendar-event-container";
+  //Uses same date information to determine id of calendar div(s) to append the event info to
+  const startDivId = reformatDate(event_info[1], "set_id");
+  const endDivId = reformatDate(event_info[2], "set_id");
 
-  const event = document.createElement("div");
-  event.className = "calendar-event";
-  event.innerText = `${event_info[0]}`; //contains user event value
+  let lengthOfEvent = endDivId - startDivId;
+  if (lengthOfEvent > 0) {
+    lengthOfEvent = lengthOfEvent / 10000;
+  }
 
-  //handles date data
+  let divId = startDivId;
 
-  const dateRow = document.createElement("div");
-  dateRow.className = "calendar-event-dates"; //holds start and end dates(if applicable)
+  for (let i = 0; i <= lengthOfEvent; i++) {
+    if (i > 0) {
+      divId += 10000;
+    }
 
-  const startDate = document.createElement("div");
-  startDate.className = "calendar-event-start-date";
-  startDate.innerText = `${event_info[1]}`; //start date value
+    //div that will display data collected from modal form
+    const eventContainer = document.createElement("div");
+    eventContainer.className = "calendar-event-container";
+    eventContainer.id = `${event_info[0] + divId}`;
 
-  const endDate = document.createElement("div");
-  endDate.className = "calendar-event-end-date";
-  endDate.innerText = `${event_info[2]}`; //end date value
+    //reformats date data into proper format for calendar div
+    const start = reformatDate(event_info[1]);
+    const end = reformatDate(event_info[2]);
 
-  //adds dates to date container
-  dateRow.appendChild(startDate);
-  dateRow.appendChild(endDate);
+    const event = document.createElement("div");
+    event.className = "calendar-event";
+    event.innerText = `${event_info[0]}`; //contains user event value
+    eventContainer.appendChild(event);
+    //handles date data
 
-  const participants = document.createElement("div");
-  participants.className = "calendar-event-participants";
-  participants.innerText = `${event_info[3]}`; //participants value
+    const dateRow = document.createElement("div");
+    dateRow.className = "calendar-event-dates"; //holds start and end dates(if applicable)
 
-  const location = document.createElement("div");
-  location.className = "calendar-event-location";
-  location.innerText = `${event_info[4]}`; //location value
+    const startDate = document.createElement("div");
+    startDate.className = "calendar-event-start-date";
+    startDate.innerText = `${start}`; //start date value
 
-  const description = document.createElement("div");
-  description.className = "calendar-event-description";
-  description.innerText = `${event_info[5]}`; //description value
+    const endDate = document.createElement("div");
+    endDate.className = "calendar-event-end-date";
+    endDate.innerText = `${end}`; //end date value
 
-  //add all of elements to event container
+    //adds dates to date container
+    dateRow.appendChild(startDate);
+    dateRow.appendChild(endDate);
+    eventContainer.appendChild(dateRow);
 
-  eventContainer.appendChild.innerHTML +=
-    event.outerHTML +
-    dateRow.outerHTML +
-    participants.outerHTML +
-    location.outerHTML +
-    description.outerHTML;
+    //adds people involved or invited
+    const participants = document.createElement("div");
+    participants.className = "calendar-event-participants";
+    participants.innerText = `${event_info[3]}`; //participants value
+    eventContainer.appendChild(participants);
 
-  //Need to place function that grabs id(s) of corresponding dates here
+    //adds location of event
+    const location = document.createElement("div");
+    location.className = "calendar-event-location";
+    location.innerText = `${event_info[4]}`; //location value
+    eventContainer.appendChild(location);
+
+    //adds description of event
+    const description = document.createElement("div");
+    description.className = "calendar-event-description";
+    description.innerText = `${event_info[5]}`; //description value
+    eventContainer.appendChild(description);
+
+    //add event to day of event
+    let dayOfEvent = document.getElementById(divId);
+    dayOfEvent.appendChild(eventContainer);
+  }
 };
 
 //adds event to the list of events in the side panel and the calendar itself
 const addEvent = () => {
-  const userEvent = document.getElementsByClassName("user-event");
-  const startDate = document.getElementsByClassName("event-start");
-  const endDate = document.getElementsByClassName("event-end");
-  const participants = document.getElementsByClassName("event-people");
-  const location = document.getElementsByClassName("event-location");
-  const description = document.getElementsByClassName("event-description");
+  const userEvent = document.getElementById("user-event").value;
+  const startDate = document.getElementById("event-start").value;
+  const endDate = document.getElementById("event-end").value;
+  const participants = document.getElementById("event-people").value;
+  const location = document.getElementById("event-location").value;
+  const description = document.getElementById("event-description").value;
 
   const values = getValue([
     userEvent,
@@ -354,7 +405,7 @@ const addEvent = () => {
   appendToEventList(values[0], values[1], values[2]);
 
   //takes all the user submitted values to place onto the corresponding calendar date(s)
-  createCalendarEventDiv(values);
+  createCalendarEventDiv(...values);
 };
 
 saveButton.addEventListener("click", addEvent, false);

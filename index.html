@@ -27,9 +27,9 @@
             </div>            
         </div>
         <div class="event-list">
-            <div class="event-date"></div>
-            <div class="event-bar"></div>
-            <div class="event-names"></div>
+            <div id="event-date"></div>
+            <div id="event-bar"></div>
+            <div id="event-names"></div>
         </div>
         <div class="event-adder">
             <!--triggers modal TBA-->
@@ -40,14 +40,14 @@
     <div class="modal">
         <div class="close-modal">X</div>
         <form action="post" class="modal-form">
-            <input name='user-event' type="text" class="modal-input" placeholder="Event" id="event-name">
+            <input name='user-event' type="text" id="user-event" placeholder="Event">
             <div>
-                <input type="text" class="event-start" placeholder="start-date">
-                <input type="text" class="event-end" placeholder="end-date">
+                <input type="date" id="event-start" placeholder="start-date" required pattern="\d{4}-\d{2}-\d{2}">
+                <input type="date" id="event-end" placeholder="end-date" required pattern="\d{4}-\d{2}-\d{2}">
             </div>
-            <input type="text" class="event-people" placeholder="people">
-            <input type="text" class="event-location" placeholder="location">
-            <input type="text" class="event-description" placeholder="description">
+            <input type="text" id="event-people" placeholder="people">
+            <input type="text" id="event-location" placeholder="location">
+            <input type="text" id="event-description" placeholder="description">
             <button class="save-event-button" type="button">
                 Save Event
             </button>
