@@ -27,7 +27,7 @@ export const setMonthName = month => {
       return "October";
     case 10 || "Nov":
       return "November";
-    case 11 || "Dec":
+    case 11 || "Dec" || -1:
       return "December";
     default:
       return;
