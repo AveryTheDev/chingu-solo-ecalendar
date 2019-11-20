@@ -1,58 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="styles.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="styles.css" />
     <title>e-Calendar</title>
-</head>
-<body>
-    <div class="cal-container">
+  </head>
+  <body>
+    <div class="cal-page-container">
+      <div class="cal-container">
         <div class="cal-header">
-            <h1 class="cal-title">eCal</h1>
-            <p class="cal-year"></p>
+          <h1 class="cal-title">eCalendar</h1>
+          <p class="cal-year"></p>
         </div>
         <div class="calendar-grid-container">
-            <!--date values calc from script file will display here-->
+          <div id="month-row">
+            <div id="previous-cal-month"></div>
+            <div id="current-cal-month"></div>
+            <div id="next-cal-month"></div>
+          </div>
+          <div id="cal-divider"></div>
+          <ul class="weekdays">
+            <li class="weekend" id="Sunday">Sun</li>
+            <li class="weekday" id="Monday">Mon</li>
+            <li class="weekday" id="Tuesday">Tue</li>
+            <li class="weekday" id="Wednesday">Wed</li>
+            <li class="weekday" id="Thusday">Thu</li>
+            <li class="weekday" id="Friday">Fri</li>
+            <li class="weekend" id="Saturday">Sat</li>
+          </ul>
+          <!--date values calc from script file will display here-->
         </div>
-    </div>
-    <div class="event-panel">
-            <!--values will be fetched via JS-->
-        <div class="current-date-display">
+      </div>
+      <div class="event-panel">
+        <div class="panel-overlay">
+          <!--values will be fetched via JS-->
+          <div id="account-container">
+            <a href="/" id="account-link">Sign-In</a>
+          </div>
+          <div class="current-date-display">
             <p class="current-day-of-week"></p>
             <div class="current-day-container">
-                <p class="current-month-of-day"></p>
-                <p class="current-day"></p>
-            </div>            
-        </div>
-        <div class="event-list">
-            <div id="event-date"></div>
+              <p class="current-month-of-day"></p>
+              <p class="current-day"></p>
+            </div>
+          </div>
+          <div id="event-list">
+            <div id="event-date" class="left"></div>
             <div id="event-bar"></div>
-            <div id="event-names"></div>
-        </div>
-        <div class="event-adder">
+            <div id="event-name-container" class="right">
+              <div id="event-names"></div>
+            </div>
+          </div>
+          <div class="event-adder">
             <!--triggers modal TBA-->
-            <p class="add-event-text"></p>
-            <button class="event-button">Add Event</button>
+            <label id="add-event-text">Add An Event</label>
+            <button id="event-button">+</button>
+          </div>
         </div>
+      </div>
     </div>
     <div class="modal">
-        <div class="close-modal">X</div>
-        <form action="post" class="modal-form">
-            <input name='user-event' type="text" id="user-event" placeholder="Event">
-            <div>
-                <input type="date" id="event-start" placeholder="start-date" required pattern="\d{4}-\d{2}-\d{2}">
-                <input type="date" id="event-end" placeholder="end-date" required pattern="\d{4}-\d{2}-\d{2}">
-            </div>
-            <input type="text" id="event-people" placeholder="people">
-            <input type="text" id="event-location" placeholder="location">
-            <input type="text" id="event-description" placeholder="description">
-            <button class="save-event-button" type="button">
-                Save Event
-            </button>
-        </form>
+      <div class="close-modal">X</div>
+      <form action="post" class="modal-form">
+        <input
+          name="user-event"
+          type="text"
+          id="user-event"
+          placeholder="Event"
+        />
+        <div class="event-date-select">
+          <input
+            type="date"
+            id="event-start"
+            placeholder="start-date"
+            required
+            pattern="\d{4}-\d{2}-\d{2}"
+          />
+          <input
+            type="date"
+            id="event-end"
+            placeholder="end-date"
+            required
+            pattern="\d{4}-\d{2}-\d{2}"
+          />
+        </div>
+        <input type="text" id="event-people" placeholder="people" />
+        <input type="text" id="event-location" placeholder="location" />
+        <input type="text" id="event-description" placeholder="description" />
+        <button class="save-event-button" type="button">
+          Save Event
+        </button>
+      </form>
     </div>
-<script src="script.js"></script>
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>
