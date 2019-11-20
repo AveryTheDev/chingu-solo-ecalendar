@@ -273,6 +273,25 @@ const start = () => {
 //runs as the document loads
 document.body.onload = start;
 
+////////////////////////////////////////////////////////////////////////////////
+
+//Modal ClassName Toggles
+const modal = document.getElementById("modal-container");
+const openModal = document.getElementById("event-button");
+const closeModal = document.getElementById("close-modal");
+
+const toggleModalView = () => {
+  if (modal.classList.contains("hide")) {
+    modal.classList.remove("hide");
+    return;
+  } else {
+    modal.classList.add("hide");
+  }
+};
+
+openModal.addEventListener("click", toggleModalView, false);
+closeModal.addEventListener("click", toggleModalView, false);
+
 //////////////////////////////////////////////////////////////////////////////////////////
 
 //handles addition of events to calendar and event list
@@ -440,7 +459,14 @@ const addEvent = () => {
   createCalendarEventDiv(...values);
 };
 
-saveButton.addEventListener("click", addEvent, false);
+saveButton.addEventListener(
+  "click",
+  () => {
+    addEvent();
+    toggleModalView();
+  },
+  false
+);
 
 //control synchronous scroll for event list postings
 
