@@ -1,4 +1,9 @@
 const setMonthName = month => {
+  if (month === -1) {
+    month = 11;
+  } else if (month === 12) {
+    month = 0;
+  }
   switch (month) {
     case 0:
       return "January";
@@ -69,6 +74,11 @@ const fetchToday = () => {
   currentDayOfWeek[0].innerText = dayOfWeek;
   currentDate[0].innerText = date;
   currentYear[0].innerText = year;
+
+  //highlights current day of week
+  const currentWeekDate = document.getElementById(dayOfWeek);
+
+  currentWeekDate.id = "currentWeekday";
 };
 
 //determines day of week the first date of the month is
@@ -177,6 +187,7 @@ const gridFromMatrix = (matrix, day, month, year) => {
 
         date.id = `${month + 1}${monthData[i][j]}${year}`;
         date.innerText = monthData[i][j];
+        date.className = "calendar_date";
         grid.appendChild(date);
 
         counter++;
@@ -237,9 +248,26 @@ const createMonthGrid = () => {
   );
 };
 
+const createMonthRow = () => {
+  const prev_month_div = document.getElementById("previous-cal-month");
+  const current_month_div = document.getElementById("current-cal-month");
+  const next_month_div = document.getElementById("next-cal-month");
+
+  const today = new Date();
+  const month = today.getMonth();
+  const prevMonth = setMonthName(month - 1);
+  const currentMonth = setMonthName(month);
+  const nextMonth = setMonthName(month + 1);
+
+  prev_month_div.innerText = prevMonth;
+  current_month_div.innerText = currentMonth;
+  next_month_div.innerText = nextMonth;
+};
+
 const start = () => {
   fetchToday();
   createMonthGrid();
+  createMonthRow();
 };
 
 //runs as the document loads
@@ -297,14 +325,18 @@ const appendToEventList = (event, start, end) => {
 
   const date = document.createElement("div");
   date.className = "date";
-  date.id = `${start} ${end}`;
-  date.innerText = `${start} ${end}`;
+  date.id = `${start}${end}`;
+  date.innerText = `${start}`;
+
+  if (end !== start) {
+    date.innerText = `${start} - ${end}`;
+  }
 
   dateHolder.appendChild(date);
 
   const eventName = document.createElement("div");
   eventName.className = "event";
-  eventName.id = `${event} ${start} ${end}`;
+  eventName.id = `${event}${start}${end}`;
   eventName.innerText = `${event}`;
 
   eventList.appendChild(eventName);
@@ -409,3 +441,26 @@ const addEvent = () => {
 };
 
 saveButton.addEventListener("click", addEvent, false);
+
+//control synchronous scroll for event list postings
+
+var isSyncingLeftScroll = false;
+var isSyncingRightScroll = false;
+var leftDiv = document.getElementsByClassName("left")[0];
+var rightDiv = document.getElementsByClassName("right")[0];
+
+leftDiv.onscroll = function() {
+  if (!isSyncingLeftScroll) {
+    isSyncingRightScroll = true;
+    rightDiv.scrollTop = this.scrollTop;
+  }
+  isSyncingLeftScroll = false;
+};
+
+rightDiv.onscroll = function() {
+  if (!isSyncingRightScroll) {
+    isSyncingLeftScroll = true;
+    leftDiv.scrollTop = this.scrollTop;
+  }
+  isSyncingRightScroll = false;
+};
