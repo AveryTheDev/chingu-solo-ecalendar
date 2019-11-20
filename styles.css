@@ -123,17 +123,31 @@ body {
   display: flex;
 }
 
+.calendar-panel {
+  display: flex;
+  align-items: center;
+  width: 70vw;
+  justify-content: center;
+}
+
+.fa-chevron-left,
+.fa-chevron-right {
+  color: #26b9cc;
+  cursor: pointer;
+  font-size: 2rem;
+}
+
 .cal-container {
   display: flex;
   flex-direction: column;
-  width: 70vw;
+  width: 62vw;
 }
 
 .cal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 2rem 4rem;
+  margin: 0rem 7rem 2rem 6rem;
   color: #26b9cc;
 }
 
@@ -159,7 +173,7 @@ body {
 
 #previous-cal-month,
 #next-cal-month {
-  color: #26b9ccd3;
+  color: #26b9cc9a;
 }
 
 #cal-divider {
@@ -206,7 +220,7 @@ body {
 
 .calendar_grid {
   display: grid;
-  height: 60vh;
+  height: 50vh;
   width: 80%;
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: repeat(5, 1fr);
@@ -404,7 +418,7 @@ body {
 
 .modal {
   height: 60vh;
-  width: 50vw;
+  width: 55vw;
   background-color: white;
   box-shadow: 0 0 9px #404442;
   display: flex;
@@ -428,10 +442,11 @@ body {
   align-items: flex-start;
   justify-content: space-around;
   height: 70%;
-  width: 80%;
+  width: 85%;
 }
 
 label {
+  font-weight: 300;
   color: #26b9cc;
 }
 
@@ -465,10 +480,53 @@ label {
 #event-date-select {
 }
 
-#event-start {
+#event-start-month {
+  font-family: "Montserrat";
+  font-weight: 300;
+  font-size: 1.1rem;
+  border: none;
+  margin-left: 1rem;
+  width: 7rem;
 }
 
-#event-end {
+#event-start-day {
+  font-family: "Montserrat";
+  font-weight: 300;
+  font-size: 1.1rem;
+  border: none;
+  width: 7rem;
+}
+
+#event-end-month {
+  font-family: "Montserrat";
+  font-weight: 300;
+  font-size: 1.1rem;
+  border: none;
+  margin-left: 1rem;
+  width: 7rem;
+}
+
+#event-end-day {
+  font-family: "Montserrat";
+  font-weight: 300;
+  font-size: 1.1em;
+  border: none;
+  width: 7rem;
+}
+
+.people,
+.location,
+.description {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.fa-user-plus {
+  color: #26b9cc;
+  font-size: 1.5rem;
+  margin-right: 1rem;
 }
 
 #event-people {
@@ -496,6 +554,12 @@ label {
   color: #575252;
 }
 
+.fa-compass {
+  color: #26b9cc;
+  font-size: 1.5rem;
+  margin-right: 1rem;
+}
+
 #event-location {
   font-family: "Montserrat";
   font-weight: 300;
@@ -519,6 +583,12 @@ label {
 #event-location::-ms-input-placeholder {
   /* Microsoft Edge */
   color: #575252;
+}
+
+.fa-bars {
+  color: #26b9cc;
+  font-size: 1.5rem;
+  margin-right: 1rem;
 }
 
 #event-description {
