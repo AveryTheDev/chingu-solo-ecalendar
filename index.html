@@ -61,38 +61,159 @@
         </div>
       </div>
     </div>
-    <div class="modal">
-      <div class="close-modal">X</div>
-      <form action="post" class="modal-form">
-        <input
-          name="user-event"
-          type="text"
-          id="user-event"
-          placeholder="Event"
-        />
-        <div class="event-date-select">
-          <input
-            type="date"
-            id="event-start"
-            placeholder="start-date"
-            required
-            pattern="\d{4}-\d{2}-\d{2}"
-          />
-          <input
-            type="date"
-            id="event-end"
-            placeholder="end-date"
-            required
-            pattern="\d{4}-\d{2}-\d{2}"
-          />
+    <div class="modal-container">
+      <div class="modal">
+        <div class="close-container">
+          <div class="close-modal">X</div>
         </div>
-        <input type="text" id="event-people" placeholder="people" />
-        <input type="text" id="event-location" placeholder="location" />
-        <input type="text" id="event-description" placeholder="description" />
-        <button class="save-event-button" type="button">
-          Save Event
-        </button>
-      </form>
+        <form action="post" class="modal-form">
+          <input
+            name="user-event"
+            type="text"
+            id="user-event"
+            required
+            placeholder="Event"
+          />
+          <div class="event-date-select">
+            <label for="event-start">Start Date</label>
+            <input
+              type="text"
+              id="event-start-month"
+              placeholder="Month"
+              required
+              list="start-month"
+            >
+            <!-- Enables dropdown format -->
+            <datalist id="start-month">
+              <option value="Jan">
+              <option value="Feb">
+              <option value="Mar">
+              <option value="Apr">
+              <option value="May">
+              <option value="Jun">
+              <option value="Jul">
+              <option value="Aug">
+              <option value="Sep">
+              <option value="Nov">
+              <option value="Dec">
+            </datalist>
+            </input>            
+            <input
+              type="text"
+              id="event-start-day"
+              placeholder="Day"
+              required
+              list="start-day"
+            >
+            <datalist id="start-day">
+              <option value="1">
+              <option value="2">
+              <option value="3">
+              <option value="4">
+              <option value="5">
+              <option value="6">
+              <option value="7">
+              <option value="8">
+              <option value="9">
+              <option value="10">
+              <option value="11">
+              <option value="12">
+              <option value="13">
+              <option value="14">
+              <option value="15">
+              <option value="16">
+              <option value="17">
+              <option value="18">
+              <option value="19">
+              <option value="20">
+              <option value="21">
+              <option value="22">
+              <option value="23">
+              <option value="24">
+              <option value="25">
+              <option value="26">
+              <option value="27">
+              <option value="28">
+              <option value="29">
+              <option value="30">
+              <option value="31">
+            </datalist>
+          </input>            
+            <label for="event-end">End Date</label>
+            <input
+              type="text"
+              id="event-end-month"
+              placeholder="Month"
+              required
+              list="end-month"
+            >
+            <datalist id="end-month">
+              <option value="Jan">
+              <option value="Feb">
+              <option value="Mar">
+              <option value="Apr">
+              <option value="May">
+              <option value="Jun">
+              <option value="Jul">
+              <option value="Aug">
+              <option value="Sep">
+              <option value="Nov">
+              <option value="Dec">
+            </datalist>
+            </input>            
+            <input
+              type="text"
+              id="event-end-day"
+              placeholder="Day"
+              required
+              list="end-day"
+            >
+            <datalist id="end-day">
+              <option value="1">
+              <option value="2">
+              <option value="3">
+              <option value="4">
+              <option value="5">
+              <option value="6">
+              <option value="7">
+              <option value="8">
+              <option value="9">
+              <option value="9">
+              <option value="10">
+              <option value="11">
+              <option value="12">
+              <option value="13">
+              <option value="14">
+              <option value="15">
+              <option value="16">
+              <option value="17">
+              <option value="18">
+              <option value="19">
+              <option value="20">
+              <option value="21">
+              <option value="22">
+              <option value="23">
+              <option value="24">
+              <option value="25">
+              <option value="26">
+              <option value="27">
+              <option value="28">
+              <option value="29">
+              <option value="30">
+              <option value="31">
+            </datalist>
+          </input>
+          </div>
+          <input type="text" id="event-people" placeholder="people" />
+          <input type="text" id="event-location" placeholder="location" />
+          <input type="text" id="event-description" placeholder="description" />
+          <div class="save-container">
+            <button class="save-event-button" type="button">
+              Save Event
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
     <script src="script.js"></script>
   </body>
