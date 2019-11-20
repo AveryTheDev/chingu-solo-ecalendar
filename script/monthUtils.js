@@ -1,3 +1,24 @@
+import { setMonthName } from "./utils.js";
+
+const setDayOfWeek = weekday => {
+  switch (weekday) {
+    case 0:
+      return "Sunday";
+    case 1:
+      return "Monday";
+    case 2:
+      return "Tuesday";
+    case 3:
+      return "Wednesday";
+    case 4:
+      return "Thursday";
+    case 5:
+      return "Friday";
+    case 6:
+      return "Saturday";
+  }
+};
+
 export const fetchToday = () => {
   const currentMonth = document.getElementsByClassName("current-month-of-day");
   const currentDayOfWeek = document.getElementsByClassName(
@@ -124,8 +145,8 @@ export const gridFromMatrix = (matrix, day, month, year) => {
   let counter = 1;
 
   // loops through arrays nested in matrix
-  for (i = 0; i < monthData.length; i++) {
-    for (j = 0; j < monthData[i].length; j++) {
+  for (let i = 0; i < monthData.length; i++) {
+    for (let j = 0; j < monthData[i].length; j++) {
       if (counter % 7 === 0 || i === monthData.length - 1) {
         let date = document.createElement("div");
         calendar[0].appendChild(grid);

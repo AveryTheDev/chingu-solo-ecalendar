@@ -8,9 +8,10 @@ export const getValue = (...form_data) => {
 };
 
 //reformats value from date inputs for various purposes in the calendar app
-export const reformatDate = (month, day, purpose = "") => {
+export const reformatDate = (month, day, purpose = "", year = 2019) => {
   if (purpose === "set_id") {
-    return ``;
+    const numberFormat = setNumberFromName(month);
+    return `${numberFormat}${day}${year}`;
   }
 
   const refined_month = setMonthName(month);

@@ -1,16 +1,16 @@
-import { setMonthName, setNumberFromName, setDayOfWeek } from "./utils";
+import { setMonthName, setNumberFromName } from "./utils.js";
 import {
   fetchToday,
   findFirstOfMonthIndex,
   createMonthMatrix,
   gridFromMatrix
-} from "./monthUtils";
+} from "./monthUtils.js";
 import {
   getValue,
   reformatDate,
   appendToEventList,
   createCalendarEventDiv
-} from "./eventUtils";
+} from "./eventUtils.js";
 
 //controls synchronous scroll for event list postings
 
