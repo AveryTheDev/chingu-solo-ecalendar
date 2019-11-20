@@ -1,4 +1,4 @@
-import { setMonthName, setNumberFromName } from "./utils.js";
+import { setMonthName } from "./utils.js";
 import {
   fetchToday,
   findFirstOfMonthIndex,
@@ -7,7 +7,6 @@ import {
 } from "./monthUtils.js";
 import {
   getValue,
-  reformatDate,
   appendToEventList,
   createCalendarEventDiv
 } from "./eventUtils.js";

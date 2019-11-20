@@ -1,3 +1,5 @@
+import { setMonthName, setNumberFromName } from "./utils.js";
+
 export const getValue = (...form_data) => {
   const values = [];
 
@@ -63,10 +65,6 @@ export const createCalendarEventDiv = (...event_info) => {
     eventContainer.className = "calendar-event-container";
     eventContainer.id = `${event_info[0] + divIncrement}`;
 
-    //reformats date data into proper format for calendar div
-    const start = reformatDate(event_info[1], event_info[2]);
-    const end = reformatDate(event_info[3], event_info[4]);
-
     const event = document.createElement("div");
     event.className = "calendar-event";
     event.innerText = `${event_info[0]}`; //contains user event value
@@ -78,11 +76,11 @@ export const createCalendarEventDiv = (...event_info) => {
 
     const startDate = document.createElement("div");
     startDate.className = "calendar-event-start-date";
-    startDate.innerText = `${start}`; //start date value
+    startDate.innerText = `${event_info[1]} ${event_info[2]}`; //start date value
 
     const endDate = document.createElement("div");
     endDate.className = "calendar-event-end-date";
-    endDate.innerText = `${end}`; //end date value
+    endDate.innerText = `${event_info[3]} ${event_info[4]}`; //end date value
 
     //adds dates to date container
     dateRow.appendChild(startDate);
