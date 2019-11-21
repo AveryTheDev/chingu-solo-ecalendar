@@ -16,6 +16,8 @@ const setDayOfWeek = weekday => {
       return "Friday";
     case 6:
       return "Saturday";
+    default:
+      return;
   }
 };
 
