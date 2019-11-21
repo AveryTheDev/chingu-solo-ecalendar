@@ -1,33 +1,53 @@
-export const setMonthName = month => {
-  if (month === -1) {
-    month = 11;
-  } else if (month === 12) {
-    month = 0;
+export const setMonthNameFromNumber = num => {
+  if (num === 12) {
+    num = 0;
+  } else if (num === -1) {
+    num = 11;
   }
+
+  const monthArr = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+  ];
+
+  return monthArr[num];
+};
+
+export const setMonthName = month => {
   switch (month) {
-    case 0 || "Jan":
+    case "Jan":
       return "January";
-    case 1 || "Feb":
+    case "Feb":
       return "February";
-    case 2 || "Mar":
+    case "Mar":
       return "March";
-    case 3 || "Apr":
+    case "Apr":
       return "April";
-    case 4 || "May":
+    case "May":
       return "May";
-    case 5 || "Jun":
+    case "Jun":
       return "June";
-    case 6 || "Jul":
+    case "Jul":
       return "July";
-    case 7 || "Aug":
+    case "Aug":
       return "August";
-    case 8 || "Sep":
+    case "Sep":
       return "September";
-    case 9 || "Oct":
+    case "Oct":
       return "October";
-    case 10 || "Nov":
+    case "Nov":
       return "November";
-    case 11 || "Dec" || -1:
+    case "Dec":
       return "December";
     default:
       return;

@@ -1,4 +1,4 @@
-import { setMonthName } from "./utils.js";
+import { setMonthNameFromNumber, setMonthName } from "./utils.js";
 import {
   fetchToday,
   findFirstOfMonthIndex,
@@ -80,9 +80,9 @@ const createMonthRow = () => {
 
   const today = new Date();
   const month = today.getMonth();
-  const prevMonth = setMonthName(month - 1);
-  const currentMonth = setMonthName(month);
-  const nextMonth = setMonthName(month + 1);
+  const prevMonth = setMonthNameFromNumber(month - 1);
+  const currentMonth = setMonthNameFromNumber(month);
+  const nextMonth = setMonthNameFromNumber(month + 1);
 
   prev_month_div.innerText = prevMonth;
   current_month_div.innerText = currentMonth;
@@ -139,7 +139,7 @@ const addEvent = () => {
   const description = document.getElementById("event-description").value;
 
   const today = new Date();
-  const month = setMonthName(today.getMonth());
+  const month = setMonthNameFromNumber(today.getMonth());
 
   if (!month.includes(startMonth) || !month.includes(endMonth)) {
     return;

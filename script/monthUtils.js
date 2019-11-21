@@ -1,4 +1,4 @@
-import { setMonthName } from "./utils.js";
+import { setMonthNameFromNumber, setMonthName } from "./utils.js";
 
 const setDayOfWeek = weekday => {
   switch (weekday) {
@@ -32,7 +32,7 @@ export const fetchToday = () => {
   //grabs dates
   const today = new Date();
 
-  const month = setMonthName(today.getMonth());
+  const month = setMonthNameFromNumber(today.getMonth());
   const dayOfWeek = setDayOfWeek(today.getDay());
   const date = today.getDate();
   const year = today.getFullYear();
@@ -51,7 +51,7 @@ export const fetchToday = () => {
 
 //determines day of week the first date of the month is
 export const findFirstOfMonthIndex = (month, year) => {
-  const selectedMonth = setMonthName(month);
+  const selectedMonth = setMonthNameFromNumber(month);
   const date = new Date(`${selectedMonth} 1 ${year}`);
   const dayOfWeek = date.getDay();
 
