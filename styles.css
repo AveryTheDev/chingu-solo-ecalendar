@@ -241,6 +241,14 @@ body {
   line-height: 4rem;
 }
 
+.previous-month-date {
+  align-self: center;
+  text-align: center;
+  font-family: "Open Sans Condensed", sans-serif;
+  font-weight: 300;
+  color: #696868;
+}
+
 .calendar_date {
   align-self: center;
   text-align: center;
@@ -248,12 +256,20 @@ body {
   font-weight: 300;
 }
 
+.weekend-date {
+  align-self: center;
+  text-align: center;
+  font-family: "Open Sans Condensed", sans-serif;
+  font-weight: 300;
+  color: #7cc0c9;
+}
+
 .event-panel {
   display: flex;
   flex-direction: column;
   height: 100%;
   width: 30vw;
-  background-image: url("./assets/img/mountain.jpg");
+  background-image: url("./assets/img/mountain-min.jpg");
   background-size: cover;
 }
 
@@ -527,7 +543,7 @@ label {
 .fa-user-plus {
   color: #26b9cc;
   font-size: 1.5rem;
-  margin-right: 1rem;
+  margin-right: 1.75rem;
 }
 
 #event-people {
@@ -558,7 +574,7 @@ label {
 .fa-compass {
   color: #26b9cc;
   font-size: 1.5rem;
-  margin-right: 1rem;
+  margin-right: 2rem;
 }
 
 #event-location {
@@ -589,7 +605,7 @@ label {
 .fa-bars {
   color: #26b9cc;
   font-size: 1.5rem;
-  margin-right: 1rem;
+  margin-right: 2rem;
 }
 
 #event-description {
