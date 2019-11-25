@@ -145,21 +145,74 @@ export const gridFromMatrix = (matrix, day, month, year) => {
 
   //counter to track when transition to next week has occured;
   let counter = 1;
+  let prevMonth = true;
 
   // loops through arrays nested in matrix
   for (let i = 0; i < monthData.length; i++) {
     for (let j = 0; j < monthData[i].length; j++) {
-      if (counter % 7 === 0 || i === monthData.length - 1) {
+      //ensure previous Month CSS is given
+      if (prevMonth === true && monthData[i][j] !== 1) {
+        let date = document.createElement("div");
+
+        date.id = `${month}${monthData[i][j]}${year}`;
+        date.innerText = monthData[i][j];
+        date.className = "previous-month-date";
+        grid.appendChild(date);
+
+        counter++;
+      }
+      //switches to current month CSS
+      else if (prevMonth === true && monthData[i][j] === 1) {
+        prevMonth = false;
+
+        let date = document.createElement("div");
+        //see if date is today's date
+        if (monthData[i][j] === today) {
+          date.className = "calendar_current_date";
+        } else {
+          date.className = "calendar_date";
+        }
+
+        date.id = `${month + 1}${monthData[i][j]}${year}`;
+        date.innerText = monthData[i][j];
+        grid.appendChild(date);
+        counter++;
+      }
+      //used if the end of the week has been reached
+      else if (counter % 7 === 0) {
         let date = document.createElement("div");
         calendar[0].appendChild(grid);
 
         date.id = `${month + 1}${monthData[i][j]}${year}`;
         date.innerText = monthData[i][j];
-        date.className = "calendar_date";
+        //see if date is today's date
+        if (monthData[i][j] === today) {
+          date.className = "calendar_current_date";
+        } else {
+          date.className = "weekend-date";
+        }
         grid.appendChild(date);
 
         counter++;
-      } else {
+      }
+      //if it is the current month and a weekend date
+      else if (!prevMonth && counter % 7 === 1) {
+        let date = document.createElement("div");
+
+        date.id = `${month + 1}${monthData[i][j]}${year}`;
+        date.innerText = monthData[i][j];
+        //see if date is today's date
+        if (monthData[i][j] === today) {
+          date.className = "calendar_current_date";
+        } else {
+          date.className = "weekend-date";
+        }
+        grid.appendChild(date);
+
+        counter++;
+      }
+      //when any other day of the month is currently selected
+      else {
         let date = document.createElement("div");
         //see if date is today's date
         if (monthData[i][j] === today) {

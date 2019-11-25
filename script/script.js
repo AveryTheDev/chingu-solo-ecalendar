@@ -160,7 +160,7 @@ const addEvent = () => {
   appendToEventList(values[0], values[2], values[4]);
 
   //takes all the user submitted values to place onto the corresponding calendar date(s)
-  createCalendarEventDiv(...values);
+  // createCalendarEventDiv(...values);
 };
 
 saveButton.addEventListener(
